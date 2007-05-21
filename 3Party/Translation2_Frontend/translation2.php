@@ -2,10 +2,16 @@
 /**
  * Translation2_Frontend
  *
- * @package Translation2_Frontend
- * @author  Sune Jensen <sj@sunet.dk>
- * @version @package-version@
+ * PHP version 4
  *
+ * @category  Internationalization
+ * @package   Translation2_Frontend
+ * @author    Sune Jensen <sj@sunet.dk>
+ * @author    Lars Olesen <lars@legestue.net>
+ * @copyright 2007 Intraface I/S
+ * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
+ * @version   @package-version@
+ * @link      http://localhost
  */
 require 'config.translation2.php';
 require 'Db_sql.php';
@@ -16,11 +22,11 @@ if(isset($_POST['submit'])) {
 
     $message = array();
 
-    $id = SafeToDb(trim($_POST['id']));
-    $page_id = SafeToDb(trim($_POST['page_id']));
-    $new_page_id = SafeToDb(trim($_POST['new_page_id']));
-    $dk = SafeToDb(trim($_POST['dk']));
-    $uk = SafeToDb(trim($_POST['uk']));
+    $id = mysql_escape_string(trim($_POST['id']));
+    $page_id = mysql_escape_string(trim($_POST['page_id']));
+    $new_page_id = mysql_escape_string(trim($_POST['new_page_id']));
+    $dk = mysql_escape_string(trim($_POST['dk']));
+    $uk = mysql_escape_string(trim($_POST['uk']));
 
     if($id == '') {
         $message[] = 'Identifier er ikke udfyldt';
