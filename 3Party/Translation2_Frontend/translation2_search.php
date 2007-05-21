@@ -1,12 +1,20 @@
 <?php
-
 /**
- * Til at redigere i translation
+ * Translation2_Frontend
  *
- *@author: Sune Jensen
+ * PHP version 4
  *
+ * @category  Internationalization
+ * @package   Translation2_Frontend
+ * @author    Sune Jensen <sj@sunet.dk>
+ * @author    Lars Olesen <lars@legestue.net>
+ * @copyright 2007 Intraface I/S
+ * @license   http://matrix.squiz.net/developer/tools/php_cs/licence BSD Licence
+ * @version   @package-version@
+ * @link      http://localhost
  */
-require('../include_first.php');
+require 'config.translation2.php';
+require 'Db_sql.php';
 
 $db = new DB_Sql;
 
