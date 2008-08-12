@@ -15,6 +15,8 @@ class PEAR_Translation2_Controller_Index extends k_Controller
         $this->getTranslation()->setLang('da');
         $translations = $this->getTranslation()->getPage(null);
         
+        $translations = array_map('utf8_decode', $translations);
+        
         $content = $this->render(dirname(__FILE__) . '/../templates/index-tpl.php', array('translations' => $translations));
         return $this->render(dirname(__FILE__) . '/../templates/wrapper-tpl.php', $data = array('content' => $content));
     }
