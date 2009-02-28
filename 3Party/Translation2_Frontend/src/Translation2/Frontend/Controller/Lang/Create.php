@@ -1,5 +1,5 @@
 <?php
-class PEAR_Translation2_Controller_Lang_Create extends k_Controller
+class Translation2_Frontend_Controller_Lang_Create extends k_Controller
 {
     private $form;
     
