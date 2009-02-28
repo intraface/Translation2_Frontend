@@ -1,7 +1,7 @@
 <?php
-class PEAR_Translation2_Controller_Lang_Index extends k_Controller
+class Translation2_Frontend_Controller_Lang_Index extends k_Controller
 {
-    public $map = array('create' => 'PEAR_Translation2_Controller_Lang_Create');
+    public $map = array('create' => 'Translation2_Frontend_Controller_Lang_Create');
 
     function GET()
     {

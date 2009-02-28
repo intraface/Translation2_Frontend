@@ -1,5 +1,5 @@
 <?php
-class PEAR_Translation2_Controller_Create extends k_Controller
+class Translation2_Frontend_Controller_Create extends k_Controller
 {
     private $form;
     
@@ -14,6 +14,7 @@ class PEAR_Translation2_Controller_Create extends k_Controller
 
         $this->form = new k_FormBehaviour($this, dirname(__FILE__) . "/../templates/form-tpl.php");
         $this->form->descriptors[] = array("name" => "identifier");
+        $this->form->descriptors[] = array('name' => 'page_id');
 
         foreach ($this->getTranslation()->getLangs('ids') as $lang) {
             $this->form->descriptors[] = array("name" => "translation[".$lang."]");

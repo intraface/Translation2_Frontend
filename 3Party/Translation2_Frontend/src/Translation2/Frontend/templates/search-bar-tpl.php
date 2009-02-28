@@ -4,13 +4,3 @@
         <input type="submit" value=" > " />
     </form>
 </div>
-
-<table>
-    <caption>Translations</caption>
-    <?php foreach ($translations as $identifier => $t): ?>
-        <tr>
-            <th><?php e($identifier); ?></th>
-            <td><?php e($t); ?></td>
-        </tr>
-    <?php endforeach; ?>
-</table>
