@@ -1,5 +1,5 @@
 
-<div class="search"><form action="<?php echo url('./'); ?>" method="GET">Search: <input type="text" name="search" value="" /> <input type="submit" value=" > " /></form></div>
+<div class="search"><form action="<?php echo url('./'); ?>" method="get">Search: <input type="text" name="search" value="" /> <input type="submit" value=" > " /></form></div>
 
 
 <?php if(isset($result) && count($result) > 0): ?>

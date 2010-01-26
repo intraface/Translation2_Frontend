@@ -133,15 +133,6 @@ class Translation2_Frontend_Controller_Index extends k_Component
         return $created_page_id;
     }
 
-    function map($name)
-    {
-        if (!isset($this->map[$name])) {
-            throw new Exception('Unqualified mapping');
-        }
-
-        return $this->map[$name];
-    }
-
     private function setMessage($message, $place = 'main')
     {
         $this->message[$place] = $message;
