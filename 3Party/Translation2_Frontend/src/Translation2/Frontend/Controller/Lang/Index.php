@@ -1,31 +1,36 @@
 <?php
-class Translation2_Frontend_Controller_Lang_Index extends k_Controller
+class Translation2_Frontend_Controller_Lang_Index extends k_Component
 {
     public $map = array('create' => 'Translation2_Frontend_Controller_Lang_Create');
+    protected $translation;
+    protected $template;
 
-    function GET()
+    function __construct(Translation2_Admin $translation, k_TemplateFactory $template)
     {
-        $this->document->title = 'Languages';
-        $this->document->options = array(
-            $this->url('create') => 'Create',
-            $this->url('../') => 'Close'
-        );
-    
+        $this->translation = $translation;
+        $this->template = $template;
+    }
+
+    function renderHtml()
+    {
         $data = array(
             'langs' => $this->context->getTranslation()->getLangs()
         );
-        
-        return $this->render(dirname(__FILE__) . '/../../templates/languages-tpl.php', $data);
+
+        $tpl = $this->template->create(dirname(__FILE__) . '/../../templates/languages');
+        return $tpl->render($this, $data);
     }
 
-    function forward($name)
+    function renderHtmlCreate()
     {
-        if (!isset($this->map[$name])) {
-            throw new Exception('Unqualified mapping');
-        }
-
-        $next = new $this->map[$name]($this, $name);
-        return $next->handleRequest();
+        $tpl = $this->template->create(dirname(__FILE__) . '/../../templates/languages-edit');
+        return $tpl->render($this, $data);
     }
+
+    function postForm()
+    {
+        $this->translation->addLang($this->body());
+    }
+
 }
 
