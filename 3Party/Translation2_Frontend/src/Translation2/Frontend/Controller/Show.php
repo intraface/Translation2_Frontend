@@ -77,7 +77,7 @@ class Translation2_Frontend_Controller_Index extends k_Component
 
         $page = $this->getTranslation()->getPage($page_id);
         if($this->body('overwrite') && isset($page[$identifier])) {
-            $this->setMessage('The translation does already exist');
+            $this->setMessage('The translation already exists');
             foreach($this->getLangs() AS $lang => $description) {
                 $this->setMessage(ucfirst($description).': '.$this->getTranslation()->get($identifier, $page_id, $lang), 'translation_'.$lang);
             }
