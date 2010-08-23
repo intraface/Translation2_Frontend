@@ -1,12 +1,12 @@
 <?php
 class Translation2_Frontend_Controller_Index extends k_Component
 {
-    private $message = array();
-    public $map = array('language' => 'Translation2_Frontend_Controller_Lang_Index');
-
+    protected $message = array();
+    protected $map = array('language' => 'Translation2_Frontend_Controller_Lang_Index');
     protected $template;
     protected $translation;
     protected $mdb2;
+    protected $values;
 
     function __construct(MDB2_Driver_Common $mdb2, k_TemplateFactory $template, Translation2_Admin $translation)
     {
@@ -32,6 +32,7 @@ class Translation2_Frontend_Controller_Index extends k_Component
         }
 
         $data['langs'] = $this->getLangs();
+        $data = $this->values;
 
         $tpl = $this->template->create('Translation2/Frontend/templates/search');
         return $tpl->render($this, $data);
@@ -60,17 +61,17 @@ class Translation2_Frontend_Controller_Index extends k_Component
     function postForm()
     {
         if($this->body('new_page_id')) {
-            $page_id = $this->POST['new_page_id'];
+            $page_id = $this->body('new_page_id');
         } elseif($this->body('page_id') && $this->body('page_id') != '<none>') {
             $page_id = $this->body('page_id');
         } else {
             $this->setMessage('You need to provide a pageID');
-            return $this->renderHtml();
+            return $this->render();
         }
 
         if($this->body('identifier')) {
             $this->setMessage('You need to fill in the identifier');
-            return $this->renderHtml();
+            return $this->render();
         }
 
         $identifier = $this->body('identifier');
@@ -81,25 +82,25 @@ class Translation2_Frontend_Controller_Index extends k_Component
             foreach($this->getLangs() AS $lang => $description) {
                 $this->setMessage(ucfirst($description).': '.$this->getTranslation()->get($identifier, $page_id, $lang), 'translation_'.$lang);
             }
-            $values = $this->body();
-            $values['overwrite'] = 1;
-            return $this->renderHtml($values);
+            $this->values = $this->body();
+            $this->values['overwrite'] = 1;
+            return $this->render();
         }
 
         if(false !== ($common_page_id = $this->getCommonPageId())) {
             $page = $this->getTranslation()->getPage($common_page_id);
-            if(empty($this->POST['overwrite']) && isset($page[$identifier])) {
+            if(!$this->body('overwrite') && isset($page[$identifier])) {
                 $this->setMessage('The translation does already exist in common');
                 foreach($this->getLangs() AS $lang => $description) {
                     $this->setMessage(ucfirst($description).': '.$this->getTranslation()->get($identifier, $common_page_id, $lang), 'translation_'.$lang);
                 }
-                $values = $this->POST->getArrayCopy();
-                $values['overwrite'] = 1;
-                return $this->GET($values);
+                $this->values = $this->body();
+                $this->values['overwrite'] = 1;
+                return $this->render();
             }
         }
 
-        $result = $this->getTranslationAdmin()->add($identifier, $page_id, $this->POST['translation']);
+        $result = $this->getTranslationAdmin()->add($identifier, $page_id, $this->body('translation'));
         if (PEAR::isError($result)) {
             throw new Exception($result->getMessage());
         }
@@ -111,7 +112,7 @@ class Translation2_Frontend_Controller_Index extends k_Component
         }
         $this->setMessage($message);
 
-        return $this->renderHtml();
+        return $this->render();
     }
 
     function getLangs()
