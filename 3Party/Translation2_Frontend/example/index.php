@@ -1,8 +1,5 @@
 <?php
 require 'config.local.php';
-
-set_include_path(INTRAFACE_PATH_INCLUDE);
-
 require 'k.php';
 require 'Root.php';
 require 'Ilib/ClassLoader.php';

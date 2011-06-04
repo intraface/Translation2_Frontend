@@ -2,8 +2,6 @@
 class Translation2_Frontend_Controller_Index extends k_Component
 {
     private $message = array();
-    public $map = array('language' => 'Translation2_Frontend_Controller_Lang_Index');
-
     protected $template;
     protected $translation;
     protected $mdb2;
@@ -17,37 +15,11 @@ class Translation2_Frontend_Controller_Index extends k_Component
 
     function renderHtml()
     {
-        $data['result'] = array();
-
-        if ($this->query('search')) {
-            $sql = 'SELECT * FROM core_translation_i18n WHERE id LIKE "%'.$this->query('search').'%"';
-            foreach($this->getLangs() AS $lang => $description) {
-                $sql .= ' OR '.$lang.' LIKE "%'.$this->query('search').'%"';
-            }
-            $result = $this->mdb2->query($sql);
-            if (PEAR::isError($result)) {
-                throw new Exception('Error in query: ' . $result->getUserInfo());
-            }
-            $data['result'] = $result->fetchAll();
-        }
-
-        $data['langs'] = $this->getLangs();
-
-        $tpl = $this->template->create('Translation2/Frontend/templates/search');
-        return $tpl->render($this, $data);
+        return 'intentionally left blank - could show the translation';
     }
 
-    function renderHtmlCreate()
+    function renderHtmlEdit()
     {
-        if(!$this->query('edit_id') && !$this->query('page_id')) {
-            $values = array();
-            $values['identifier'] = $this->query('edit_id');
-            $values['page_id'] = $this->query('page_id');
-            foreach($this->getLangs() AS $lang => $description) {
-                $values['translation'][$lang] = $this->translation->get($this->query('edit_id'), $this->query('page_id'), $lang);
-            }
-        }
-
         $data['created_page_id'] = $this->getCreatedPageId();
         $data['message'] = $this->getMessages();
         $data['langs'] = $this->getLangs();

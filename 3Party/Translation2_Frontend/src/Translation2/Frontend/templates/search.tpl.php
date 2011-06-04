@@ -1,6 +1,10 @@
+<div class="search">
+	<form action="<?php echo url('./'); ?>" method="get">
+		<label>Search: <input type="text" name="search" value="" /></label> <input type="submit" value=" > " />
+	</form>
+</div>
 
-<div class="search"><form action="<?php echo url('./'); ?>" method="get">Search: <input type="text" name="search" value="" /> <input type="submit" value=" > " /></form></div>
-
+<p><a href="<?php e(url(null, array('create'))); ?>">Create</a></p>
 
 <?php if(isset($result) && count($result) > 0): ?>
     <table>
@@ -20,7 +24,7 @@
                 <?php foreach($langs AS $lang => $description): ?>
                     <td><?php e($translation[$lang]); ?></td>
                 <?php endforeach ?>
-                <td><a href="<?php echo url('../', array('edit_id' => $translation['id'], 'page_id' => $translation['page_id'])); ?>">Edit</a></td>
+                <td><a href="<?php e(url($translation['id'], array('page_id' => $translation['page_id']))); ?>">Edit</a></td>
             </tr>
         <?php endforeach ?>
     </table>

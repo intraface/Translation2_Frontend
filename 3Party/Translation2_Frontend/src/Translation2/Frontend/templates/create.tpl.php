@@ -1,8 +1,11 @@
 <?php if(!empty($message['main'])): ?><div class="message"><?php echo $message['main']; ?></div><?php endif; ?>
 
-<form action="<?php e(url(NULL)); ?>" method="POST">
+<form action="<?php e(url(NULL, array('create'))); ?>" method="POST">
 
-<div class="formrow"><label for="identifier">Identifier</label><input type="text" name="identifier" value="<?php if(isset($values['identifier'])) echo $values['identifier']; ?>" /></div>
+<div class="formrow">
+	<label for="identifier">Identifier</label>
+	<input type="text" name="identifier" value="<?php if(isset($values['identifier'])) echo $values['identifier']; ?>" />
+</div>
 
 
 <div class="formrow"><label for="page_id">PageId</label>
@@ -11,7 +14,7 @@
             <option value="<?php e($created_page_id[$i]); ?>" <?php if(isset($values['page_id']) && $values['page_id'] == $created_page_id[$i]) e('selected="selected"'); ?> ><?php e($created_page_id[$i]); ?></option>
         <?php endfor; ?>
     </select>
-    Ny: <input type="text" name="new_page_id" value="<?php if(isset($values['new_page_id'])) echo $values['new_page_id']; ?>" /> 
+    Ny: <input type="text" name="new_page_id" value="<?php if(isset($values['new_page_id'])) echo $values['new_page_id']; ?>" />
 </div>
 
 <?php foreach($langs AS $lang => $description): ?>
