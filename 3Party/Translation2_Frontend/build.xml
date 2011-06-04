@@ -4,10 +4,9 @@
     <taskdef classname="phing.tasks.ext.IlibPearDeployerTask" name="peardeploy" />
 
     <property name="package-name" value="${phing.project.name}" />
-    <property name="version" value="1.0.0" />
+    <property name="version" value="2.0.0" />
     <property name="stability" value="stable" />
     <property name="pear.channel" value="public.intraface.dk" />
-
     <property name="source.dir" value="." />
     <property name="tests.dir" value="./tests" />
     <property name="build.dir" value="../build" />
@@ -56,7 +55,7 @@
                 <pear minimum_version="1.6.0" recommended_version="1.6.1" />
                 <package name="Translation2" channel="pear.php.net" recommended_version="2.0.1" minimum_version="2.0.0" />
             </dependencies>
-            <notes>* Initial release</notes>
+            <notes>* Upgraded to konstrukt2</notes>
         </d51pearpkg2>
     </target>
 
